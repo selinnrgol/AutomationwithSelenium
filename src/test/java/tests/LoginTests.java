@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -27,10 +28,11 @@ public class LoginTests {
         driver.manage().window().maximize();
         homePage= new HomePage(driver);
         loginPage= new LoginPage(driver);
+        driver.get("https://www.hepsiburada.com/");
 
     }
     @Test
-    void hepsiburadaLoginTesti () throws InterruptedException{
+    void hepsiburadaLoginTesti () {
 
         driver.get("https://www.hepsiburada.com/");
 
@@ -44,17 +46,21 @@ public class LoginTests {
         homePage.waitElement(homePage.loginHomePage);//giriş yap elementi bekle
         homePage.pushButton(homePage.loginHomePage);//giriş yap butonuna bas
 
-
-
         loginPage.waitElement(loginPage.emailAdressLoginPage);//giriş yap sayfasında emailadresinin elementi gözükmesini bekleyecek
         loginPage.writeInTheArea(loginPage.emailAdressLoginPage,"seleniumAutimation@gmail.com");// emaili yaz
         loginPage.waitElement(loginPage.loginButtonLoginPage);// giriş yap tuşu elementini göreceğiz
         loginPage.pushButton(loginPage.loginButtonLoginPage);//giriş yap tuşuna basılacak
 
     }
-   /* @AfterEach
+    @Test
+    void urunAramaTest()throws InterruptedException{
+        homePage.waitElementCss(homePage.urunArama);
+        homePage.writeInTheAreaCss(homePage.urunArama, "araba");
+        homePage.pressKeys(homePage.urunArama, Keys.ENTER);
+    }
+    @AfterEach
     void tearDown(){
         driver.close();
     }
-    */
+
 }
